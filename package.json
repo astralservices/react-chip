@@ -1,11 +1,11 @@
 {
-  "name": "react-chip",
-  "version": "0.1.5",
+  "name": "@astralservices/react-chip",
+  "version": "1.0.0",
   "description": "Manage a list of chips based on a strings list.",
-  "homepage": "https://cjpatoilo.com/react-chip",
-  "repository": "cjpatoilo/react-chip",
+  "homepage": "https://github.com/astralservices/react-chip",
+  "repository": "astralservices/react-chip",
   "license": "MIT",
-  "author": "CJ Patoilo <cjpatoilo@gmail.com>",
+  "author": "Jack Merrill <me@jackmerrill.com>, CJ Patoilo <cjpatoilo@gmail.com>",
   "private": false,
   "main": "dist/index.js",
   "module": "dist/react-chip.esm.js",
@@ -24,47 +24,35 @@
     "react-chips"
   ],
   "ignore": [
-    "artwork.psd",
-    ".appveyor.yml",
     ".editorconfig",
     ".github",
     ".gitignore",
     ".travis.yml"
   ],
   "dependencies": {
-    "react": "^17.0.1",
-    "styled-components": "^5.2.1"
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.20",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@types/styled-components": "^5.1.7",
-    "boeing": "latest",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "husky": "^4.3.8",
-    "inject-ga": "^0.2.4",
     "lint-staged": "^10.5.3",
-    "marshmallow": "latest",
     "prettier-standard": "^16.4.1",
-    "react-dom": "^17.0.1",
+    "react-dom": "^18.2.0",
     "rimraf": "^3.0.2",
     "tsdx": "^0.14.1",
     "tslib": "^2.1.0",
     "typescript": "^4.1.3"
   },
   "peerDependencies": {
-    "react": ">=17",
-    "styled-components": ">=5"
+    "react": ">=18"
   },
   "scripts": {
     "build": "tsdx build --entry index.tsx",
-    "deploy": "marshmallow -o docs -i artwork.psd -f -m && inject-ga docs/index.html -o docs/index.html -c 'UA-24389952-13' && boeing docs && rimraf docs",
     "lint": "prettier-standard --check",
     "start": "tsdx watch --entry index.tsx",
     "test": "tsdx test --env=jsdom"
-  },
-  "engines": {
-    "node": "^12.18.0"
   },
   "prettier": {
     "jsxSingleQuote": false,
