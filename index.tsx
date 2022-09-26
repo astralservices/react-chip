@@ -5,6 +5,8 @@ export type ReactChipType = {
   labelClass: string;
   chipClass: string;
   focusClass: string;
+  regex?: RegExp;
+  maxChipLength?: number;
   defaultChips?: string | string[];
   defaultValue?: string;
   htmlFor?: string;
@@ -20,6 +22,8 @@ export default function ReactChip({
   chipClass = "",
   labelClass = "",
   focusClass = "",
+  regex = /^[0-9a-zA-Z,]+$/,
+  maxChipLength = 9999,
   defaultChips = [],
   defaultValue = "",
   id = "",
@@ -32,7 +36,12 @@ export default function ReactChip({
   const [input, setInput] = useState(defaultValue);
 
   function handleAddition(chip: string) {
-    if (chips?.length >= maxLength || chips?.includes(chip)) return;
+    if (
+      chips?.length >= maxLength ||
+      chips?.includes(chip) ||
+      !chip.match(regex)
+    )
+      return;
     const updateChips = [...chips, chip?.trim()];
     onChange(updateChips);
     setChips(updateChips);
@@ -54,12 +63,7 @@ export default function ReactChip({
     } = event;
 
     if (value === "") setInput("");
-    if (
-      value[0] === "," // ||
-      // !value?.match(/^[0-9a-zA-Z,]+$/) ||
-      // value?.length > 20
-    )
-      return;
+    if (value[0] === "," || value?.length > maxChipLength) return;
     if (value?.match(/,/g)) handleAddition(value?.split(",")[0]);
     else setInput(value);
   }
@@ -104,12 +108,13 @@ export default function ReactChip({
               key={chip}
               onClick={event => handleClick(event, chip)}
             >
+              <input type="hidden" name={name} value={chip} readOnly />
               {chip}
             </span>
           ))
         : null}
       <input
-        name={name}
+        name={`${name}-input`}
         className={inputClass}
         type="text"
         onChange={handleChange}
